@@ -16,12 +16,3 @@ class Stack:
 
     def size(self):
         return len(self.items)
-
-s = Stack()
-s.push('x')
-s.push('y')
-s.pop()
-s.push('z')
-s.peek()
-for i in s.items:
-    print(i)
