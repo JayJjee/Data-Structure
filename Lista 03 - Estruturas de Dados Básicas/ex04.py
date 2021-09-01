@@ -33,7 +33,6 @@ for cont2 in range(atvRestam):
     print(f'Atividade: {atividade[cont2]}, Prioridade: #{prioridade[cont2]}')
 
 
-
 '''
 Comer 1 Academia 2 Dormir 3 ElaborarQuestoes 4 Banhar 5
 0
