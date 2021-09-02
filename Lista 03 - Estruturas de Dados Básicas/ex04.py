@@ -3,6 +3,10 @@ class Queue:
     def __init__(self):
         self.fila = []
 
+    def priori(self):
+        self.lista = sorted(self.fila, key=lambda priori: priori[1], reverse=True)
+        return self.lista
+
     def dequeue(self):
         return self.fila.pop()
 
@@ -17,7 +21,6 @@ class Queue:
     
     def printar(self):
         return print(self.fila)
-        
 
 entrada1 = input().split()
 qntRealizada = int(input())
@@ -25,7 +28,7 @@ atvRestam = math.ceil(len(entrada1)/2) - qntRealizada
 entradaDiv = math.ceil(len(entrada1)/2)
 atividade = []
 prioridade = []
-ativi_priori = []
+ativi_priori = 0
 fila = Queue()
 
 for cont in range(len(entrada1)):
@@ -36,10 +39,16 @@ for cont in range(len(entrada1)):
 
 print(f"Tamanho da fila: {atvRestam}")
 for cont2 in range(entradaDiv):
-    ativi_priori.append((atividade[cont2],prioridade[cont2]))
+    fila.enqueue((atividade[cont2],prioridade[cont2]))
+ativi_priori = fila.priori()
+print(ativi_priori)
 
-fila.enqueue(sorted(ativi_priori, key=lambda prioridade: prioridade[1]))
-fila.printar()
+for cont3 in range(qntRealizada):
+    ativi_priori.pop()
+
+for cont4 in range(atvRestam):
+    print(f'Atividade: {ativi_priori[cont4]}, Prioridade: #{ativi_priori[cont4]}')
+print(ativi_priori)
 
 '''
 Comer 1 Academia 2 Dormir 3 ElaborarQuestoes 4 Banhar 5
