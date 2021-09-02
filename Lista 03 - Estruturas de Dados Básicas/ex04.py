@@ -17,22 +17,29 @@ class Queue:
     
     def printar(self):
         return print(self.fila)
+        
 
 entrada1 = input().split()
 qntRealizada = int(input())
 atvRestam = math.ceil(len(entrada1)/2) - qntRealizada
-atividade = Queue()
-prioridade = Queue()
+entradaDiv = math.ceil(len(entrada1)/2)
+atividade = []
+prioridade = []
+ativi_priori = []
+fila = Queue()
 
 for cont in range(len(entrada1)):
     if cont % 2 != 0:
-        prioridade.enqueue(entrada1[cont])
+        prioridade.append(entrada1[cont])
     elif cont % 2 == 0:
-        atividade.enqueue(entrada1[cont])
+        atividade.append(entrada1[cont])
 
 print(f"Tamanho da fila: {atvRestam}")
-atividade.printar()
-prioridade.printar()
+for cont2 in range(entradaDiv):
+    ativi_priori.append((atividade[cont2],prioridade[cont2]))
+
+fila.enqueue(sorted(ativi_priori, key=lambda prioridade: prioridade[1]))
+fila.printar()
 
 '''
 Comer 1 Academia 2 Dormir 3 ElaborarQuestoes 4 Banhar 5
