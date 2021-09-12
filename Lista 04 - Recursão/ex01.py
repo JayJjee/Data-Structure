@@ -1,14 +1,29 @@
+from itertools import combinations
+
 listaPremios = input().split()
+listaPremios2 = [int(i) for i in listaPremios]
 numSort = int(input())
-tamLista = len(listaPremios)-1
+bPossivel = False
 
-def somatoria(n):
-    for cont in range(n, 0, -1):
-        if cont != n and listaPremios[cont]+listaPremios[n] == numSort:
-            return 'E possivel ganhar'
-    if n == 0:
-        return 'Impossivel ganhar.'
-    else:
-        return somatoria(n-1)
+def somatoria(r):
+    global bPossivel
+    if r > len(listaPremios2)+1:
+        return
+    somas = []
+    somas += list(combinations(listaPremios2, r))
+    for lista in somas:
+        if sum(lista) == numSort:
+            bPossivel = True
+            return
+    somatoria(r+1)
 
-print(somatoria(tamLista))
+if len(listaPremios2) == 1:
+    if numSort == listaPremios2[0]:
+        bPossivel = True
+else:
+    somatoria(2)
+
+if bPossivel == True:
+    print("E possivel ganhar.")
+else:
+    print("Impossivel ganhar.")
