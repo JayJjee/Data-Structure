@@ -9,8 +9,10 @@ def fibonacci(n):
             aux = listFibo[cont] + listFibo[cont+1]
             listFibo.append(aux)
         for cont2 in range(listFibo[-2], listFibo[-1]):
-            if cont2 != listFibo[-2] and cont2 != listFibo[-1]:
+            if cont2 > listFibo[-2] and cont2 < listFibo[-1]:
                 notFibo.append(cont2)
+    print(listFibo)
+    print(notFibo)
 
 num = int(input())
 fibonacci(num)
