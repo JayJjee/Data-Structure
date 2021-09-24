@@ -29,8 +29,18 @@ class Playlist:
             return self.playlist.remove(id)
     
     def nextid(self, id):
-        self.indice = self.playlist.index(id)
-    
+        global bPlay
+        if bPlay == True:
+            for cont in range(len(self.playlist)):
+                if id == self.playlist[cont] and id != self.playlist[self.indice]:
+                    self.playlist.remove(id)
+                    self.playlist.insert(self.indice+1, id)
+        else:
+            for cont in range(len(self.playlist)):
+                if id == self.playlist[cont] and id != self.playlist[self.indice]:
+                    self.playlist.remove(id)
+                    self.playlist.insert(self.indice, id)
+
     def isEmpty(self):
          return self.playlist == []
 
@@ -64,15 +74,6 @@ class Playlist:
         else:
             return
 
-''' def isEmptyBuff(self):
-         return self.buff == []
-
-    def pop(self):
-         return self.buff.pop()
-
-    def push(self, item):
-        self.buff.append(item)'''
-
 listaPrincipal = Playlist()
 entrada = ' '
 while entrada[0] != 'fight':
@@ -90,7 +91,7 @@ while entrada[0] != 'fight':
         listaPrincipal.delid(entrada[1])
 
     elif entrada[0] == 'next':
-        pass
+        listaPrincipal.nextid(entrada[1])
  
     elif entrada[0] == 'list':
         listaPrincipal.list()
