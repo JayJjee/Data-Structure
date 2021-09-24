@@ -26,9 +26,10 @@ class Playlist:
         if self.isEmpty():
             print('[vazia]')
         else:
-            for cont in range(len(self.playlist)):
+            for cont in range(len(self.playlist)-1):
                 print(self.playlist[cont], end=', ')
             print(self.playlist[cont+1])
+
 
     def current(self):
         if self.isEmpty():
@@ -49,13 +50,13 @@ class Playlist:
 
     '''def undo()#pra cada ação uma reconstrução'''
 
-entrada = input().split()
 listaPrincipal = Playlist()
-
+entrada = ' '
 while entrada[0] != 'fight':
+    entrada = input().split()
     if entrada[0] == 'play':
         pass
-
+    
     elif entrada[0] == 'stop':
         pass
 
@@ -67,12 +68,15 @@ while entrada[0] != 'fight':
 
     elif entrada[0] == 'next':
         pass
-
+ 
     elif entrada[0] == 'list':
-        pass
+        listaPrincipal.list()
+    
     elif entrada[0] == 'current':
         print(listaPrincipal.current())
+    
     elif entrada[0] == 'undo':
         pass
+    
     elif entrada[0] == 'ended':
         pass
