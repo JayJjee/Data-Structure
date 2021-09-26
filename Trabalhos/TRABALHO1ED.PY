@@ -8,6 +8,9 @@ class Playlist:
         self.indice = 0
         self.buff = []
 
+    def isEmpty(self):
+         return self.playlist == []
+
     def play(self):
         global bPlay
         if self.playlist == []:
@@ -22,31 +25,35 @@ class Playlist:
     
     def delid(self, id):
         global bPlay
-        if bPlay == True:
-            if self.playlist[self.indice] == id:
-                return 0
+        if self.isEmpty():
+            pass
+        else:
+            if bPlay == True:
+                if self.playlist[self.indice] == id:
+                    return 0
+                else:
+                    deleted.append(id)
+                    return self.playlist.remove(id)
             else:
                 deleted.append(id)
                 return self.playlist.remove(id)
-        else:
-            deleted.append(id)
-            return self.playlist.remove(id)
     
     def nextid(self, id):
         global bPlay
-        if bPlay == True:
-            for cont in range(len(self.playlist)):
-                if id == self.playlist[cont] and id != self.playlist[self.indice]:
-                    self.playlist.remove(id)
-                    self.playlist.insert(self.indice+1, id)
+        if self.isEmpty():
+            pass
         else:
-            for cont in range(len(self.playlist)):
-                if id == self.playlist[cont] and id != self.playlist[self.indice]:
-                    self.playlist.remove(id)
-                    self.playlist.insert(self.indice, id)
+            if bPlay == True:
+                for cont in range(len(self.playlist)):
+                    if id == self.playlist[cont] and id != self.playlist[self.indice]:
+                        self.playlist.remove(id)
+                        self.playlist.insert(self.indice+1, id)
 
-    def isEmpty(self):
-         return self.playlist == []
+            else:
+                for cont in range(len(self.playlist)):
+                    if id == self.playlist[cont] and id != self.playlist[self.indice]:
+                        self.playlist.remove(id)
+                        self.playlist.insert(self.indice, id)
 
     def list(self):
         if self.isEmpty():
@@ -61,7 +68,7 @@ class Playlist:
 
     def current(self):
         if self.isEmpty():
-            return "Toque! Toque, Dijê!"
+            return print("Toque! Toque, Dijê!")
         elif len(self.playlist) == 1:
             print(self.playlist[0])
         else:
@@ -80,21 +87,23 @@ class Playlist:
                 self.indice = 0
         else:
             return
-    def undo(self):
-        global bPlay
-        contList = len(self.playlist)-1
-        for acao in actionList[::-1]:
-            if acao == 'add':
-                return self.playlist.remove(self.playlist[contList])
-            elif acao == 'del':
-                return self.playlist.append(self.playlist[contList])
-            elif acao == 'next':
-                print('next')
-            elif acao == 'play':
-                bPlay = False
-                print('bPlay é falso.')
-                return bPlay
-            contList -= 1
+    def undo(self):        
+        if self.isEmpty():
+            pass
+        else:
+            global bPlay
+            contList = len(self.playlist)-1
+            for acao in actionList[::-1]:
+                if acao == 'add':
+                    return self.playlist.remove(self.playlist[contList]) 
+                elif acao == 'del':
+                    pass
+                elif acao == 'next':
+                    pass
+                elif acao == 'play':
+                    bPlay = False
+                    return bPlay
+                contList -= 1
     def undoast(self):
         global bPlay
         contList = len(self.playlist)-1
@@ -106,7 +115,6 @@ class Playlist:
                 self.playlist.append(self.playlist[contList])
                 contList -= 1
             elif acao == 'next':
-                print('next')
                 contList -= 1
             elif acao == 'play':
                 bPlay = False
@@ -143,13 +151,13 @@ while entrada[0] != 'fight':
         listaPrincipal.current()
 
     elif entrada[0] == 'undo':
+        listaPrincipal.undo()
+
+    elif entrada[0] == 'undo':
         if len(entrada) > 1:
             if entrada[1] == '*':
                 listaPrincipal.undoast()
 
-    elif entrada[0] == 'undo':
-        listaPrincipal.undo()
-        
     elif entrada[0] == 'ended':
         listaPrincipal.ended()
 
