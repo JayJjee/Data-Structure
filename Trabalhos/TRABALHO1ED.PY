@@ -1,4 +1,6 @@
 bPlay = False
+actionList = []
+deleted = []
 
 class Playlist:
     def __init__(self):
@@ -22,10 +24,12 @@ class Playlist:
         global bPlay
         if bPlay == True:
             if self.playlist[self.indice] == id:
-                return 
+                return 0
             else:
+                deleted.append(id)
                 return self.playlist.remove(id)
         else:
+            deleted.append(id)
             return self.playlist.remove(id)
     
     def nextid(self, id):
@@ -52,13 +56,16 @@ class Playlist:
                 print(self.playlist[0])
             else:
                 for cont in range(len(self.playlist)-1):
-                    print(self.playlist[cont], end=', ') 
+                    print(self.playlist[cont], end=',')
                 print(self.playlist[cont+1])
 
     def current(self):
         if self.isEmpty():
             return "Toque! Toque, Dijê!"
-        return self.playlist[self.indice]
+        elif len(self.playlist) == 1:
+            print(self.playlist[0])
+        else:
+            print(self.playlist[self.indice])
 
     def stop(self):
         global bPlay
@@ -73,35 +80,76 @@ class Playlist:
                 self.indice = 0
         else:
             return
+    def undo(self):
+        global bPlay
+        contList = len(self.playlist)-1
+        for acao in actionList[::-1]:
+            if acao == 'add':
+                return self.playlist.remove(self.playlist[contList])
+            elif acao == 'del':
+                return self.playlist.append(self.playlist[contList])
+            elif acao == 'next':
+                print('next')
+            elif acao == 'play':
+                bPlay = False
+                print('bPlay é falso.')
+                return bPlay
+            contList -= 1
+    def undoast(self):
+        global bPlay
+        contList = len(self.playlist)-1
+        for acao in actionList[::-1]:
+            if acao == 'add':
+                self.playlist.remove(self.playlist[contList])
+                contList -= 1
+            elif acao == 'del':
+                self.playlist.append(self.playlist[contList])
+                contList -= 1
+            elif acao == 'next':
+                print('next')
+                contList -= 1
+            elif acao == 'play':
+                bPlay = False
+                contList -= 1
 
 listaPrincipal = Playlist()
 entrada = ' '
 while entrada[0] != 'fight':
     entrada = input().split()
+
     if entrada[0] == 'play':
         bPlay = listaPrincipal.play()
-    
+        actionList.append('play')
+
     elif entrada[0] == 'stop':
         bPlay = listaPrincipal.stop()
-
+    
     elif entrada[0] == 'add':
         listaPrincipal.addid(entrada[1])
+        actionList.append('add')
 
     elif entrada[0] == 'del':
         listaPrincipal.delid(entrada[1])
+        actionList.append('del')
 
     elif entrada[0] == 'next':
         listaPrincipal.nextid(entrada[1])
+        actionList.append('next')
  
     elif entrada[0] == 'list':
         listaPrincipal.list()
     
     elif entrada[0] == 'current':
-        print(listaPrincipal.current())
-    
+        listaPrincipal.current()
+
     elif entrada[0] == 'undo':
-        pass
-    
+        if len(entrada) > 1:
+            if entrada[1] == '*':
+                listaPrincipal.undoast()
+
+    elif entrada[0] == 'undo':
+        listaPrincipal.undo()
+        
     elif entrada[0] == 'ended':
         listaPrincipal.ended()
 
