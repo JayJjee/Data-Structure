@@ -14,6 +14,7 @@ if menu == 1:
     vetorTeste.inserir_elemento_posicao(3, 2)
     vetorTeste.inserir_elemento_posicao(4, 2)
     vetorTeste.inserir_elemento_posicao(5, 2)
+    vetorTeste.inserir_elemento_final(1)
     '''vetorTeste.inserir_elemento_final(1)
     vetorTeste.inserir_elemento_final(2)
     vetorTeste.inserir_elemento_final(3)
@@ -23,6 +24,7 @@ if menu == 1:
     print(vetorTeste.listar_elemento(2))
     print(vetorTeste.listar_elemento(3))'''
     print(vetorTeste)
-    print(vetorTeste.contem(3))
+    vetorTeste.remover_elemento_indice(3)
     print(vetorTeste)
-    print(vetorTeste.indice(5))
+    vetorTeste.remover_elemento(5)
+    print(vetorTeste)
