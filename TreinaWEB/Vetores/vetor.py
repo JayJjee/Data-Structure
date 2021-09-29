@@ -23,6 +23,7 @@ class Vetor():
             if elem == elemento:
                 return True
         return False
+
     def indice(self, elemento):
         for cont in range(self.tamanho_vetor()):
             elem = self.listar_elemento(cont)
@@ -36,7 +37,6 @@ class Vetor():
 
         self.__elementos[self.__posicao] = elemento
         self.__posicao += 1
-        
 
     def remover_elemento_indice(self, posicao):
         vetor_inicio = self.__elementos[:posicao]
@@ -44,7 +44,6 @@ class Vetor():
         self.__elementos = vetor_inicio + vetor_final
         self.__posicao -= 1
 
-    
     def remover_elemento(self, elemento):
         posicao = self.indice(elemento)
         self.remover_elemento_indice(posicao)
