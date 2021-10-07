@@ -2,7 +2,8 @@ class ArvoreBinaria:
     def BinaryTree(raiz):
         return (raiz, (), ())
 
-    def insertLeft(raiz, )
+    def insertLeft(raiz):
+        pass
 ''' def __init__(self, root):
         self.dado = root
         self.esq = None
