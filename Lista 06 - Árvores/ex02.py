@@ -1,29 +1,13 @@
-class ArvoreBinaria:
-    def BinaryTree(raiz):
-        return (raiz, (), ())
+def mostra(raiz):
 
-    def insertLeft(raiz):
-        pass
-''' def __init__(self, root):
-        self.dado = root
-        self.esq = None
-        self.dir = None
-    
-    def insertEsq(self, newNode):
-        if self.esq == None:
-            self.esq = ArvoreBinaria(newNode)
-        else:
-            t = ArvoreBinaria(newNode)
-            t.esq = self.esq
-            self.esq = t
-    
-    def insertDir(self, newNode):
-        if self.dir == None:
-            self.dir = ArvoreBinaria(newNode)
-        else:
-            t = ArvoreBinaria(newNode)
-            t.dir = self.dir
-            self.dir = t'''
+    print("(", end="")
 
-myTree = ArvoreBinaria()
-print(myTree)
+    if raiz != None:
+
+        print(raiz.dado, end="")
+        print(" ", end="")
+        mostra(raiz.esq)
+        print(" ", end="")
+        mostra(raiz.dir)
+        
+    print(")", end="")
