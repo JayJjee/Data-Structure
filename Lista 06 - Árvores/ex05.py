@@ -1,26 +1,8 @@
 class Tree:
-    def __init__(self, valor = None):
-        if valor != None:
-            self.valor = valor
-        else:
-            self.valor = None
+    def __init__(self, valor):
+        self.valor = valor
         self.left = None
         self.right = None
-
-    def insert(self, valor):
-        if self.valor:
-            if valor < self.valor:
-                if self.left is None:
-                    self.left = Tree(valor)
-                else:
-                    self.left.insert(valor)
-            elif valor > self.valor:
-                    if self.right is None:
-                        self.right = Tree(valor)
-                    else:
-                        self.right.insert(valor)
-        else:
-            self.valor = valor
 
     def printEmOrdem(self):
         if self.left:
@@ -43,6 +25,20 @@ class Tree:
             self.right.printPosOrdem()
         print(self.valor, end=' ')
 
+def inserirABB(raiz, no):
+    if raiz is None:
+        raiz = no
+    elif no.valor > raiz.valor:
+        if raiz.right is None:
+            raiz.right = no
+        else:
+            inserirABB(raiz.right, no)
+    else: 
+        if raiz.left is None:
+            raiz.left = no
+        else:
+            inserirABB(raiz.left, no)
+
 entrada = input()
 
 while entrada.isnumeric() == False:
@@ -57,7 +53,7 @@ while entrada != 'quack':
     entrada = input()
     if entrada.isnumeric():
         entradaNum = int(entrada)
-        raiz.insert(entradaNum)
+        inserirABB(raiz, Tree(entradaNum))
     if entrada == 'in':
         raiz.printEmOrdem()
         print()
