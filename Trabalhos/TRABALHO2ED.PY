@@ -1,4 +1,4 @@
-def insert(self, elem):
+'''def insert(self, elem):
         
         if len(elem[1]) == self.altura:
             self.chave = elem[0]
@@ -11,4 +11,4 @@ def insert(self, elem):
                 if not self.dir: self.dir = ta
                 else: ta=self.dir
                 
-            ta.insert(elem)
+            ta.insert(elem)'''
