@@ -1,3 +1,8 @@
+def get_key(val):
+    for chave, valor in dic.items():
+         if val == valor:
+             return chave
+
 numberInput = int(input())
 dic = {}
 mensagem = []
@@ -14,30 +19,40 @@ codemsg = int(input())
 if codemsg == 0:
     codemsg = input().split()
     space = "/"
+    bMes = True
 
     for code in codemsg:
-        if space in code:
+        if code in dic.values():
+            mensagem.append(get_key(code))
+        elif space in code:
             mensagem.append(" ")
-            mensagem.append(dic[code[1:]])
-        else:
-            if code in dic.values():
-                mensagem.append(dic[code])
+            if get_key(code) == None:
+                pass
             else:
-                print("Impossível decodificar a mensagem!")
-                exit()
-    print("".join(mensagem))
+                mensagem.append(get_key(code[1:]))
+        else:
+            bMes = False
+    if bMes == True:
+        print(mensagem)
+        print("".join(mensagem))
+    else:
+        print("Impossível codificar a mensagem!")
 
 elif codemsg == 1:
     codemsg = input()
+    bMes = True
     for letter in codemsg:
-        if letter == " ":
-            espaço_Lista.append("/")
+        if letter in dic.keys():
+            espaço_Lista.append(dic[letter])
+            mensagem.append(dic[letter])
+            mensagem.append(" ")
+        elif letter == " ":
+            mensagem.append("/")
+            if mensagem[-2] == "/":
+                mensagem.pop()
         else:
-            if letter in dic.keys():
-                espaço_Lista.append(dic[letter])
-                mensagem.append(dic[letter])
-                mensagem.append(" ")
-            else: 
-                print("Impossível codificar a mensagem!")
-                exit()
-    print("".join(mensagem))
+            bMes = False
+    if bMes == True:
+        print("".join(mensagem))
+    else:
+        print("Impossível codificar a mensagem!")
