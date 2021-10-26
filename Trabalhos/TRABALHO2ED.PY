@@ -1,14 +1,43 @@
-'''def insert(self, elem):
-        
-        if len(elem[1]) == self.altura:
-            self.chave = elem[0]
-        elif len(elem[1])> self.altura:
-            ta  = Arvore(self.altura+1)
-            if elem[1][self.altura] == '.':
-                if not self.esq: self.esq = ta
-                else: ta=self.esq
+numberInput = int(input())
+dic = {}
+mensagem = []
+espaço_Lista = []
+
+for cont in range(numberInput):
+    morse = input().split()
+    letter = morse[0]
+    code = morse[1]
+    dic.update({letter:code})
+
+codemsg = int(input())
+
+if codemsg == 0:
+    codemsg = input().split()
+    space = "/"
+
+    for code in codemsg:
+        if space in code:
+            mensagem.append(" ")
+            mensagem.append(dic[code[1:]])
+        else:
+            if code in dic.values():
+                mensagem.append(dic[code])
             else:
-                if not self.dir: self.dir = ta
-                else: ta=self.dir
-                
-            ta.insert(elem)'''
+                print("Impossível decodificar a mensagem!")
+                exit()
+    print("".join(mensagem))
+
+elif codemsg == 1:
+    codemsg = input()
+    for letter in codemsg:
+        if letter == " ":
+            espaço_Lista.append("/")
+        else:
+            if letter in dic.keys():
+                espaço_Lista.append(dic[letter])
+                mensagem.append(dic[letter])
+                mensagem.append(" ")
+            else: 
+                print("Impossível codificar a mensagem!")
+                exit()
+    print("".join(mensagem))
